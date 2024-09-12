@@ -1,0 +1,22 @@
+
+
+-- Serve para armazenar a informação da captura do arquivo
+CREATE TABLE data_log (
+    uuid VARCHAR(36) PRIMARY KEY,  -- Todos os registros relativos a captura terão este mesmo id
+    object VARCHAR(255),
+    record_date DATETIME DEFAULT CURRENT_TIMESTAMP,  -- Armazena a data e a hora do arquivo capturado
+    object_last_modified_date DATETIME  -- Armazena a data e a hora de moficação do arquivo, usado na lógica de decisão para fazer uma nova captura
+);
+
+-- Serve para armazenar a informação da captura de Producao.csv
+CREATE TABLE producao (
+    uuid VARCHAR(36) ,            -- UUID da captura
+    id INT NOT NULL,
+    control VARCHAR(50),
+    produto VARCHAR(255),
+    ano INT,
+    quantidade DECIMAL(15, 2),
+    tipo VARCHAR(50),                        -- Para identificar se é item ou é pai
+    totalizador VARCHAR(255),
+    PRIMARY KEY (uuid, id)
+);

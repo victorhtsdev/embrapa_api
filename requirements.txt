@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+python-dotenv
+pymysql
+cryptography
+requests
+pytest
+pandas
+apscheduler
