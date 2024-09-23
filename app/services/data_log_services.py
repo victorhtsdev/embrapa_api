@@ -2,18 +2,19 @@ import base64
 from datetime import datetime
 import os
 import requests
+import traceback
 from flask import current_app
 from sqlalchemy.exc import NoResultFound
+from uuid import uuid1
 
 from app.extensions import db
 from app.models.data_log import DataLog
 from app.management.file_manager import download_file
-from uuid import uuid1
 from app.management.init_variables import get_latest_record_by_object
 from app.services.producao_services import insert_producao_by_uuid
+from app.management.log_manager import log_register
 
-
-def get_production_file_url(objeto):
+def get_file_url(objeto):
     try:
         base_url = os.getenv('EMBRAPA_URL')
         if not base_url:
@@ -27,8 +28,12 @@ def get_production_file_url(objeto):
         full_url = f"{base_url}{file_name}"
         return full_url
 
+    except EnvironmentError as e:
+        log_register(objeto, f"Erro de ambiente ao obter URL de {objeto}: {e}\n{traceback.format_exc()}")
+        raise RuntimeError(f"Erro de ambiente ao obter URL de {objeto}: {e}")
     except Exception as e:
-        raise RuntimeError(f"Erro ao obter URL de {objeto}: {e}")
+        log_register(objeto, f"Erro inesperado ao obter URL de {objeto}: {e}\n{traceback.format_exc()}")
+        raise RuntimeError(f"Erro inesperado ao obter URL de {objeto}: {e}")
 
 def get_data_from_embrapa(objeto):
     try:
@@ -38,7 +43,7 @@ def get_data_from_embrapa(objeto):
         if latest_record:
             object_modified_date = latest_record.object_modified_date
 
-        url = get_production_file_url(objeto)
+        url = get_file_url(objeto)
         if not url:
             raise ValueError(f"URL para o objeto {objeto} não pôde ser construída.")
 
@@ -52,7 +57,6 @@ def get_data_from_embrapa(objeto):
         http_modified = datetime.strptime(http_modified, '%a, %d %b %Y %H:%M:%S %Z')
 
         if object_modified_date and http_modified <= object_modified_date:
-            print(f"O arquivo {objeto} não foi modificado desde a última captura.")
             return latest_record
 
         new_uuid = str(uuid1())
@@ -71,14 +75,18 @@ def get_data_from_embrapa(objeto):
         )
         db.session.add(new_record)
         db.session.commit()
-        print(f"Registro criado na tabela data_log com UUID: {new_uuid}")
 
         return new_record
 
     except requests.exceptions.RequestException as e:
+        log_register(objeto, f"Erro ao obter dados do arquivo {objeto}: {e}\n{traceback.format_exc()}")
         raise RuntimeError(f"Erro ao obter dados do arquivo {objeto}: {e}")
+    except ValueError as e:
+        log_register(objeto, f"Erro de valor ao processar {objeto}: {e}\n{traceback.format_exc()}")
+        raise RuntimeError(f"Erro de valor ao processar {objeto}: {e}")
     except Exception as e:
-        raise RuntimeError(f"Erro inesperado: {e}")
+        log_register(objeto, f"Erro inesperado ao processar {objeto}: {e}\n{traceback.format_exc()}")
+        raise RuntimeError(f"Erro inesperado ao processar {objeto}: {e}")
 
 def get_data_log_by_uuid(uuid):
     try:
@@ -102,7 +110,8 @@ def get_data_log_by_uuid(uuid):
 
         return result
 
-    except NoResultFound:
-        raise ValueError(f"Nenhuma entrada encontrada no DataLog para o UUID: {uuid}")
+    except NoResultFound as e:
+        raise ValueError(f"Nenhum registro encontrado para o UUID: {uuid}")
     except Exception as e:
-        raise RuntimeError(f"Erro ao recuperar a entrada do DataLog: {e}")
+        log_register('data_log', f"Erro ao acessar o banco de dados: {e}\n{traceback.format_exc()}")
+        raise RuntimeError(f"Erro ao acessar o banco de dados: {e}")

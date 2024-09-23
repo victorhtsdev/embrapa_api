@@ -7,6 +7,7 @@ def run_embrapa_task():
     get_data_from_embrapa('producao')
     get_data_from_embrapa('exportacaoUva')
     get_data_from_embrapa('exportacaoEspumantes')
+    get_data_from_embrapa('exportacaoVinhoMesa')
 
 def start_scheduler():
     scheduler = BackgroundScheduler()
