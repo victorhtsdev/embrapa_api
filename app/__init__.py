@@ -14,9 +14,8 @@ def create_app():
     app.register_blueprint(data_log_bp, url_prefix='/api')
 
     with app.app_context():
-        start_scheduler()
         try:
-            run_embrapa_task()
+            start_scheduler()
         except Exception:
             pass
 
