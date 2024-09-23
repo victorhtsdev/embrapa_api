@@ -13,9 +13,11 @@ def create_app():
     app.register_blueprint(producao_bp, url_prefix='/api')
     app.register_blueprint(data_log_bp, url_prefix='/api')
 
-    # Garantir que o agendador inicie dentro do contexto da aplicação
     with app.app_context():
         start_scheduler()
-        run_embrapa_task()
+        try:
+            run_embrapa_task()
+        except Exception:
+            pass
 
     return app
