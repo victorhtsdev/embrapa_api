@@ -69,49 +69,55 @@ def get_producao(ano=None):
         if ano:
             query = query.filter(Producao.ano == ano)
 
-        totalizadores = query.filter(Producao.tipo == 'T').order_by(Producao.id.asc(), Producao.ano.desc()).all()
+        tipo_produtos = query.filter(Producao.tipo == 'T').order_by(Producao.id.asc(), Producao.ano.desc()).all()
 
-        resultado = {
+        result = {
             'last_uuid': uuid,
-            'record_date': record_date,
-            'object_modified_data': object_modified_date,
-            'producao': {}
+            'record_date': record_date.strftime('%a, %d %b %Y %H:%M:%S GMT'),
+            'object_modified_data': object_modified_date.strftime('%a, %d %b %Y %H:%M:%S GMT'),
+            'producao': []
         }
-        ano_atual = None
 
-        for totalizador in totalizadores:
-            ano_key = str(totalizador.ano)
+        for tipo_produto in tipo_produtos:
+            ano_key = str(tipo_produto.ano)
 
-            if ano_key != ano_atual:
-                ano_atual = ano_key
-                if ano_key not in resultado['producao']:
-                    resultado['producao'][ano_key] = {
-                        'total': 0,  # Inicializa a soma total para o ano
-                    }
+            ano_json = next((item for item in result['producao'] if item['ano'] == ano_key), None)
 
-            resultado['producao'][ano_key]['total'] += totalizador.quantidade
+            if not ano_json:
+                ano_json = {
+                    'ano': ano_key,
+                    'quantidade_total': 0,
+                    'tipos': []
+                }
+                result['producao'].append(ano_json)
 
-            resultado['producao'][ano_key][totalizador.produto] = {
-                'quantidade': totalizador.quantidade,
-                'itens': []
+            ano_json['quantidade_total'] += tipo_produto.quantidade
+
+            tipo_produto_json = {
+                'tipo_produto': tipo_produto.produto,
+                'itens': [],
+                'quantidade_tipo': tipo_produto.quantidade
             }
 
-            itens_query = db.session.query(Producao).filter(
+            item_query = db.session.query(Producao).filter(
                 Producao.uuid == uuid,
-                Producao.ano == totalizador.ano,
-                Producao.totalizador == totalizador.produto,
+                Producao.ano == tipo_produto.ano,
+                Producao.totalizador == tipo_produto.produto,
                 Producao.tipo == 'I'
             ).all()
 
-            for item in itens_query:
+            for item in item_query:
                 item_data = {
                     'produto': item.produto,
-                    'quantidade_item': item.quantidade
+                    'quantidade_produto': item.quantidade
                 }
-                resultado['producao'][ano_key][totalizador.produto]['itens'].append(item_data)
+                tipo_produto_json['itens'].append(item_data)
 
-        return resultado
+            ano_json['tipos'].append(tipo_produto_json)
+
+        return result
 
     except Exception as e:
         log_register('producao', f"Erro ao consultar producao: {e}\n{traceback.format_exc()}")
         raise RuntimeError(f"Erro ao consultar produções: {e}")
+
