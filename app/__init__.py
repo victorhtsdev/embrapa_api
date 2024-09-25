@@ -15,7 +15,7 @@ def create_app():
 
     with app.app_context():
         try:
-            start_scheduler()
+            start_scheduler(app)
         except Exception:
             pass
 
