@@ -6,7 +6,9 @@ from app.services.data_log_services import get_data_from_embrapa
 
 def run_embrapa_task(app):
     with app.app_context():
-        objetos = ['producao', 'exportacaoEspumantes', 'exportacaoVinhoMesa', 'exportacaoUvasFrescas', 'exportacaoSuco']
+        objetos = ['producao', 'exportacaoEspumantes', 'exportacaoVinhoMesa', 'exportacaoUvasFrescas', 'exportacaoSuco',
+                   'importacaoEspumantes', 'importacaoVinhoMesa', 'importacaoUvasFrescas', 'importacaoSuco',
+                   'importacaoPassas']
 
         for objeto in objetos:
             try:
@@ -16,7 +18,7 @@ def run_embrapa_task(app):
 def start_scheduler(app):
     scheduler = BackgroundScheduler()
 
-    scheduler.add_job(func=lambda: run_embrapa_task(app), trigger="interval", seconds=10)
+    scheduler.add_job(func=lambda: run_embrapa_task(app), trigger="interval", hours=2)
 
     run_embrapa_task(app)
 

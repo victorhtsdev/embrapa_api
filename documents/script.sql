@@ -29,5 +29,18 @@ CREATE TABLE exportacao (
     pais VARCHAR(255),
     ano INT,
     quantidade DECIMAL(15, 2),
+    valor DECIMAL(15, 2),
+    PRIMARY KEY (uuid, id,ano)
+);
+
+-- Serve para armazenar a informação da captura de Imp<objeto>.csv
+CREATE TABLE importacao (
+    uuid VARCHAR(36) ,            -- UUID da captura
+    id INT NOT NULL,
+    object VARCHAR(255),
+    pais VARCHAR(255),
+    ano INT,
+    quantidade DECIMAL(15, 2),
+    valor DECIMAL(15, 2),
     PRIMARY KEY (uuid, id,ano)
 );
