@@ -1,19 +1,14 @@
 import os
 from datetime import datetime
-from dotenv import load_dotenv
-
-
-load_dotenv()
-
 
 def log_register(objeto, message):
-
     log_folder = f"log/{objeto}"
 
     env_var = f"{objeto.upper()}_LOG"
     log_enabled = os.getenv(env_var, 'N')
+    all_log_enabled = os.getenv('ALL_LOG', 'N')
 
-    if log_enabled != 'Y':
+    if log_enabled != 'Y' and all_log_enabled != 'Y':
         print(f"Logging for '{objeto}' is disabled.")
         return
 

@@ -3,7 +3,7 @@ import pandas as pd
 from app.extensions import db
 from app.models.producao import Producao
 from app.management.init_variables import get_latest_record_by_object
-from app.management.log_manager import log_register  # Importando o log_register
+from app.management.log_manager import log_register
 import traceback
 
 def insert_producao_by_uuid(uuid):
