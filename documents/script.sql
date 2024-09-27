@@ -21,7 +21,7 @@ CREATE TABLE producao (
     PRIMARY KEY (uuid, id,ano)
 );
 
-Serve para armazenar a informação da captura de Comercio.csv
+--Serve para armazenar a informação da captura de Comercio.csv
 CREATE TABLE comercio (
     uuid VARCHAR(36) ,            -- UUID da captura
     id INT NOT NULL,
@@ -56,5 +56,18 @@ CREATE TABLE importacao (
     ano INT,
     quantidade DECIMAL(15, 2),
     valor DECIMAL(15, 2),
+    PRIMARY KEY (uuid, id,ano)
+);
+
+CREATE TABLE processamento (
+    uuid VARCHAR(36) ,            -- UUID da captura
+    id INT NOT NULL,
+    control VARCHAR(50),
+    object VARCHAR(255),
+    cultivar VARCHAR(255),
+    ano INT,
+    quantidade DECIMAL(15, 2),
+    tipo VARCHAR(50),                        -- Para identificar se é item ou é pai
+    totalizador VARCHAR(255),                -- Para identificar a qual item pai se refere
     PRIMARY KEY (uuid, id,ano)
 );

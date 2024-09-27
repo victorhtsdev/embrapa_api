@@ -33,7 +33,6 @@ def insert_producao_by_uuid(uuid):
 
             for ano in anos_colunas:
                 quantidade = row[ano]
-
                 novo_registro = Producao(
                     uuid=uuid,
                     id=id,

@@ -14,6 +14,7 @@ from app.management.init_variables import get_latest_record_by_object
 from app.services.comercio_services import insert_comercio_by_uuid
 from app.services.exportacao_services import insert_exportacao_by_uuid
 from app.services.importacao_services import insert_importacao_by_uuid
+from app.services.processamento_services import insert_processamento_by_uuid
 from app.services.producao_services import insert_producao_by_uuid
 from app.management.log_manager import log_register
 
@@ -75,6 +76,8 @@ def get_data_from_embrapa(objeto):
             insert_importacao_by_uuid(new_uuid, objeto)
         elif objeto == 'comercio':
             insert_comercio_by_uuid(new_uuid)
+        elif objeto.startswith('processamento'):
+            insert_processamento_by_uuid(new_uuid,objeto)
 
         new_record = DataLog(
             uuid=new_uuid,
