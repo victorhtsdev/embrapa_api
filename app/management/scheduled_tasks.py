@@ -8,7 +8,7 @@ def run_embrapa_task(app):
     with app.app_context():
         objetos = ['producao', 'exportacaoEspumantes', 'exportacaoVinhoMesa', 'exportacaoUvasFrescas', 'exportacaoSuco',
                    'importacaoEspumantes', 'importacaoVinhoMesa', 'importacaoUvasFrescas', 'importacaoSuco',
-                   'importacaoPassas']
+                   'importacaoPassas','comercio']
 
         for objeto in objetos:
             try:

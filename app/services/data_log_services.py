@@ -11,6 +11,7 @@ from app.extensions import db
 from app.models.data_log import DataLog
 from app.management.file_manager import download_file
 from app.management.init_variables import get_latest_record_by_object
+from app.services.comercio_services import insert_comercio_by_uuid
 from app.services.exportacao_services import insert_exportacao_by_uuid
 from app.services.importacao_services import insert_importacao_by_uuid
 from app.services.producao_services import insert_producao_by_uuid
@@ -72,6 +73,8 @@ def get_data_from_embrapa(objeto):
             insert_exportacao_by_uuid(new_uuid, objeto)
         elif objeto.startswith('importacao'):
             insert_importacao_by_uuid(new_uuid, objeto)
+        elif objeto == 'comercio':
+            insert_comercio_by_uuid(new_uuid)
 
         new_record = DataLog(
             uuid=new_uuid,
