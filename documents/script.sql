@@ -71,3 +71,9 @@ CREATE TABLE processamento (
     totalizador VARCHAR(255),                -- Para identificar a qual item pai se refere
     PRIMARY KEY (uuid, id,ano)
 );
+
+CREATE TABLE usuarios (
+    id CHAR(36) PRIMARY KEY,
+    usuario VARCHAR(80) NOT NULL UNIQUE,
+    senha VARCHAR(200) NOT NULL
+);
