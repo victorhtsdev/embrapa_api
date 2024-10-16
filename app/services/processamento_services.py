@@ -6,7 +6,7 @@ from app.management.log_manager import log_register
 from app.models.processamento import Processamento
 import traceback
 
-def insert_processamento_by_uuid(uuid, objeto):
+def insert_processamento_by_uuid(uuid, objeto, delimiter):
     try:
         file_trace = os.path.join('app', 'trace', objeto)
         file_path = os.path.join(file_trace, f"{uuid}.csv")
@@ -14,8 +14,11 @@ def insert_processamento_by_uuid(uuid, objeto):
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"Arquivo {uuid}.csv não encontrado na pasta {file_trace}")
 
-        df = pd.read_csv(file_path, delimiter=';', index_col=False)
-        df.replace({"**": 0, "nd": 0, "*": 0}, inplace=True)
+        if not delimiter:
+            delimiter = ';'
+
+        df = pd.read_csv(file_path, delimiter=delimiter, index_col=False)
+        df.replace({"**": 0, "nd": 0, "*": 0, "+": 0}, inplace=True)
 
         df = df.fillna(0)
 
@@ -65,17 +68,19 @@ def insert_processamento_by_uuid(uuid, objeto):
 def get_processamento(objeto, ano=None):
     try:
         latest_record = get_latest_record_by_object(objeto)
-
         uuid = latest_record.uuid
         record_date = latest_record.record_date
         object_modified_date = latest_record.object_modified_date
 
-        query = db.session.query(Processamento).filter(Processamento.uuid == uuid, Processamento.object == objeto)
-
+        query = db.session.query(Processamento).filter(
+            Processamento.uuid == uuid, Processamento.object == objeto
+        )
         if ano:
             query = query.filter(Processamento.ano == ano)
 
-        tipos_cultivar = query.filter(Processamento.tipo == 'T').order_by(Processamento.id.asc(), Processamento.ano.desc()).all()
+        registros = query.order_by(
+            Processamento.id.asc(), Processamento.ano.desc()
+        ).all()
 
         result = {
             'last_uuid': uuid,
@@ -84,10 +89,9 @@ def get_processamento(objeto, ano=None):
             'processamento': []
         }
 
-        for tipo_cultivar in tipos_cultivar:
-            ano_key = str(tipo_cultivar.ano)
-
-            ano_json = next((item for item in result['processamento'] if item['ano'] == ano_key), None)
+        for registro in registros:
+            ano_key = str(registro.ano)
+            ano_json = next((entry for entry in result['processamento'] if entry['ano'] == ano_key), None)
 
             if not ano_json:
                 ano_json = {
@@ -97,29 +101,43 @@ def get_processamento(objeto, ano=None):
                 }
                 result['processamento'].append(ano_json)
 
-            ano_json['quantidade_total_kg'] += tipo_cultivar.quantidade
-
-            tipo_cultivar_json = {
-                'tipo_cultivar': tipo_cultivar.cultivar,
-                'itens': [],
-                'quantidade_tipo_kg': tipo_cultivar.quantidade
-            }
-
-            item_query = db.session.query(Processamento).filter(
-                Processamento.uuid == uuid,
-                Processamento.ano == tipo_cultivar.ano,
-                Processamento.totalizador == tipo_cultivar.cultivar,
-                Processamento.tipo == 'I'
-            ).all()
-
-            for item in item_query:
-                item_data = {
-                    'cultivar': item.cultivar,
-                    'quantidade_cultivar_kg': item.quantidade
+            if registro.tipo == 'T':
+                tipo_cultivar_json = {
+                    'tipo_cultivar': registro.cultivar,
+                    'itens': [],
+                    'quantidade_tipo_kg': registro.quantidade
                 }
-                tipo_cultivar_json['itens'].append(item_data)
 
-            ano_json['tipos'].append(tipo_cultivar_json)
+                item_query = db.session.query(Processamento).filter(
+                    Processamento.uuid == uuid,
+                    Processamento.ano == registro.ano,
+                    Processamento.totalizador == registro.cultivar,
+                    Processamento.tipo == 'I'
+                ).all()
+
+                for item in item_query:
+                    tipo_cultivar_json['itens'].append({
+                        'cultivar': item.cultivar,
+                        'quantidade_cultivar_kg': item.quantidade
+                    })
+
+                ano_json['tipos'].append(tipo_cultivar_json)
+                ano_json['quantidade_total_kg'] += registro.quantidade
+
+            elif registro.tipo == 'I' and not any(
+                tipo['tipo_cultivar'] == registro.totalizador for tipo in ano_json['tipos']
+            ):
+                tipo_cultivar_json = {
+                    'tipo_cultivar': registro.totalizador,
+                    'itens': [{
+                        'cultivar': registro.cultivar,
+                        'quantidade_cultivar_kg': registro.quantidade
+                    }],
+                    'quantidade_tipo_kg': registro.quantidade
+                }
+
+                ano_json['tipos'].append(tipo_cultivar_json)
+                ano_json['quantidade_total_kg'] += registro.quantidade
 
         return result
 

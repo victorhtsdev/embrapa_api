@@ -76,8 +76,10 @@ def get_data_from_embrapa(objeto):
             insert_importacao_by_uuid(new_uuid, objeto)
         elif objeto == 'comercio':
             insert_comercio_by_uuid(new_uuid)
+        elif objeto.startswith('processamentoViniferas'):
+            insert_processamento_by_uuid(new_uuid,objeto,';')
         elif objeto.startswith('processamento'):
-            insert_processamento_by_uuid(new_uuid,objeto)
+            insert_processamento_by_uuid(new_uuid,objeto,'\t')
 
         new_record = DataLog(
             uuid=new_uuid,

@@ -69,7 +69,7 @@ CREATE TABLE processamento (
     quantidade DECIMAL(15, 2),
     tipo VARCHAR(50),                        -- Para identificar se é item ou é pai
     totalizador VARCHAR(255),                -- Para identificar a qual item pai se refere
-    PRIMARY KEY (uuid, id,ano)
+    PRIMARY KEY (uuid, id,control,ano)
 );
 
 CREATE TABLE usuarios (
