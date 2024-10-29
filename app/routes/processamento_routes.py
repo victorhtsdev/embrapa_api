@@ -16,7 +16,13 @@ processamento_bp = Blueprint('processamento', __name__)
             'in': 'path',
             'type': 'string',
             'required': True,
-            'description': 'O objeto/Tipo de UVA, para o qual os dados de processamento são recuperados'
+            'description': (
+                    'Opções da aba Processamento do site da Embrapa.<br>'
+                    '<b>processamentoViniferas</b> - Viníferas<br>'
+                    '<b>processamentoAmericanas</b> - Americanas e Híbridas<br>'
+                    '<b>processamentoUvaMesa</b> - Uvas de Mesa<br>'
+                    '<b>processamentoSemClass</b> - Sem Classificação<br><br>'
+            )
         },
         {
             'name': 'ano',

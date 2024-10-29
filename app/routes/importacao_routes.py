@@ -16,7 +16,14 @@ importacao_bp = Blueprint('importacao', __name__)
             'in': 'path',
             'type': 'string',
             'required': True,
-            'description': 'Objeto de importação'
+            'description': (
+                    'Opções da aba Importação do site da Embrapa:<br>'
+                    '<b>importacaoVinhoMesa</b> - Vinhos de Mesa<br>'
+                    '<b>importacaoEspumantes</b> - Espumantes<br>'
+                    '<b>importacaoUvasFrescas</b> - Uvas Frescas<br>'
+                    '<b>importacaoUvasPassas</b> - Uvas Passas<br>'
+                    '<b>importacaoSuco</b> - Suco de Uva<br><br>'
+            )
         },
         {
             'name': 'ano',

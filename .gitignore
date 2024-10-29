@@ -1,4 +1,5 @@
 /tests/
-/app/trace/*
-/log/*
+/app/trace/
+/log/
 /venv/
+/__pycache__/

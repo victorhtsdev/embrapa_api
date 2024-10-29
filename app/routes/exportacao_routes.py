@@ -16,7 +16,13 @@ exportacao_bp = Blueprint('exportacao', __name__)
             'in': 'path',
             'type': 'string',
             'required': True,
-            'description': 'Objeto/Tipo de Uva de exportação'
+            'description': (
+                    'Opções da aba Exportação do site da Embrapa:<br>'
+                    '<b>exportacaoVinhoMesa</b> - Vinhos de Mesa<br>'
+                    '<b>exportacaoEspumantes</b> - Espumantes<br>'
+                    '<b>exportacaoUvasFrescas</b> - Uvas Frescas<br>'
+                    '<b>exportacaoSuco</b> - Suco de Uva<br><br>'
+            )
         },
         {
             'name': 'ano',
