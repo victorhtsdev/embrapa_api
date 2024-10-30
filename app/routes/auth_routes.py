@@ -8,6 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
 @swag_from({
+    'tags': ['Autenticação'],
     'summary': 'Login, gerar Bearer Token',
     'parameters': [
         {
@@ -56,6 +57,7 @@ def login():
 
 @auth_bp.route('/register', methods=['POST'])
 @swag_from({
+    'tags': ['Autenticação'],
     'summary': 'Registro de Usuários',
     'parameters': [
         {

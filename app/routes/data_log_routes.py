@@ -9,6 +9,7 @@ data_log_bp = Blueprint('data_info', __name__)
 @data_log_bp.route('/data_info/<string:uuid>', methods=['GET'])
 @jwt_required()
 @swag_from({
+    'tags': ['Dados Embrapa'],
     'summary': 'Obter os dados e metadados da captura no site da Embrapa, (Versionamento do CSV de Download)',
     'security': [{"BearerAuth": []}],
     'parameters': [
