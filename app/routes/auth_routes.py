@@ -36,7 +36,7 @@ auth_bp = Blueprint('auth', __name__)
             'description': 'Invalid credentials',
             'examples': {
                 'application/json': {
-                    'error': 'Credenciais inválidas'
+                    'msg': 'Credenciais inválidas'
                 }
             }
         }
@@ -51,7 +51,7 @@ def login():
     if user:
         access_token = create_access_token(identity=user.usuario)
         return jsonify(access_token=access_token), 200
-    return jsonify({"error": "Credenciais inválidas"}), 401
+    return jsonify({"msg": "Credenciais inválidas"}), 401
 
 
 @auth_bp.route('/register', methods=['POST'])
@@ -84,7 +84,7 @@ def login():
             'description': 'Username and password are required',
             'examples': {
                 'application/json': {
-                    'error': 'Username e senha são obrigatórios'
+                    'msg': 'Username e senha são obrigatórios'
                 }
             }
         },
@@ -92,7 +92,7 @@ def login():
             'description': 'User already exists',
             'examples': {
                 'application/json': {
-                    'error': 'Usuário já existe'
+                    'msg': 'Usuário já existe'
                 }
             }
         }
@@ -103,10 +103,10 @@ def register():
     password = request.json.get('password')
 
     if not username or not password:
-        return jsonify({"error": "Username e senha são obrigatórios"}), 400
+        return jsonify({"msg": "Username e senha são obrigatórios"}), 400
 
     user = create_usuario(username, password)
 
     if user:
         return jsonify({"msg": "Usuário cadastrado com sucesso"}), 201
-    return jsonify({"error": "Usuário já existe"}), 409
+    return jsonify({"msg": "Usuário já existe"}), 409

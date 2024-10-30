@@ -23,21 +23,21 @@ def create_app():
 
     swagger_config = {
         "title": "Embrapa API - POS TECH FIAP",
-        "description": "API para retornar os dados de Produção, Processamento, Comercialização, Importação e Exportação da Embrapa.",
+        "description": "API para obter os dados de Produção, Processamento, Comercialização, Importação e Exportação da Embrapa.",
         "version": "1.0.0",
         "termsOfService": "/terms",
         "specs": [
             {
                 "endpoint": "apispec_1",
                 "route": "/apispec_1.json",
-                "rule_filter": lambda rule: True,  # Incluir todos os endpoints
-                "model_filter": lambda tag: True,  # Incluir todos os modelos
+                "rule_filter": lambda rule: True,
+                "model_filter": lambda tag: True,
             }
         ],
         "static_url_path": "/flasgger_static",
         "swagger_ui": True,
         "specs_route": "/apidocs/",
-        "headers": []  # Define headers como uma lista vazia
+        "headers": []
     }
 
 
