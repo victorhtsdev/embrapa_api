@@ -19,7 +19,7 @@ data_log_bp = Blueprint('data_info', __name__)
             'in': 'path',
             'type': 'string',
             'required': True,
-            'description': 'O UUID do log de dados'
+            'description': 'UUID de controle de dados'
         },
         {
             'name': 'Authorization',
@@ -32,9 +32,14 @@ data_log_bp = Blueprint('data_info', __name__)
     'responses': {
         200: {
             'description': 'Log de dados recuperado com sucesso',
-            'examples': {
-                'application/json': {
-                    'data': 'exemplo de dados'
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'data_source': {'type': 'string', 'description': 'Dados fonte codificados em base64'},
+                    'object': {'type': 'string', 'description': 'Tipo de objeto'},
+                    'object_modified_date': {'type': 'string', 'description': 'Data de modificação do objeto'},
+                    'record_date': {'type': 'string', 'description': 'Data de registro'},
+                    'uuid': {'type': 'string', 'description': 'UUID do registro'}
                 }
             }
         },

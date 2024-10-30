@@ -23,7 +23,7 @@ def create_app():
 
     swagger_config = {
         "title": "Embrapa API - POS TECH FIAP",
-        "description": "API disponibilizar dados de Produção, Processamento, Comercialização, Importação e Exportação capturados da Embrapa.",
+        "description": "API para disponibilizar dados de Produção, Processamento, Comercialização, Importação e Exportação capturados da Embrapa.",
         "version": "1.0.0",
         "specs": [
             {
