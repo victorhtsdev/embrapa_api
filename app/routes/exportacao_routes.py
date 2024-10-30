@@ -12,6 +12,7 @@ exportacao_bp = Blueprint('exportacao', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Exportação por Ano',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Exportação',
     'parameters': [
         {
             'name': 'objeto',

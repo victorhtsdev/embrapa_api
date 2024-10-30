@@ -12,6 +12,7 @@ comercio_bp = Blueprint('comercio', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Comercialização por ano',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Comercialização',
     'parameters': [
         {
             'name': 'ano',

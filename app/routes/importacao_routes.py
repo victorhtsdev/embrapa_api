@@ -12,6 +12,7 @@ importacao_bp = Blueprint('importacao', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Importação por Ano',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Importação',
     'parameters': [
         {
             'name': 'objeto',

@@ -12,6 +12,7 @@ data_log_bp = Blueprint('data_info', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter os dados e metadados da captura no site da Embrapa, (Versionamento do CSV de Download)',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Log',
     'parameters': [
         {
             'name': 'uuid',

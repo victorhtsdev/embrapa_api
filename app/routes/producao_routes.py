@@ -12,6 +12,7 @@ producao_bp = Blueprint('producao', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Produção por Ano',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Produção',
     'parameters': [
         {
             'name': 'ano',

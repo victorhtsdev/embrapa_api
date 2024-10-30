@@ -12,6 +12,7 @@ processamento_bp = Blueprint('processamento', __name__)
     'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Processamento por Ano',
     'security': [{"BearerAuth": []}],
+    'operationId': 'Processamento',
     'parameters': [
         {
             'name': 'objeto',

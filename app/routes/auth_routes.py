@@ -10,6 +10,7 @@ auth_bp = Blueprint('auth', __name__)
 @swag_from({
     'tags': ['Autenticação'],
     'summary': 'Login, gerar Bearer Token',
+    'operationId': 'Login',
     'parameters': [
         {
             'name': 'body',
@@ -59,6 +60,7 @@ def login():
 @swag_from({
     'tags': ['Autenticação'],
     'summary': 'Registro de Usuários',
+    'operationId': 'Usuários',
     'parameters': [
         {
             'name': 'body',
