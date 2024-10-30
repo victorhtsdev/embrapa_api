@@ -25,7 +25,6 @@ def create_app():
         "title": "Embrapa API - POS TECH FIAP",
         "description": "API para obter os dados de Produção, Processamento, Comercialização, Importação e Exportação da Embrapa.",
         "version": "1.0.0",
-        "termsOfService": "/terms",
         "specs": [
             {
                 "endpoint": "apispec_1",
