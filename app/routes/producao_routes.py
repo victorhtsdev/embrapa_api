@@ -10,6 +10,7 @@ producao_bp = Blueprint('producao', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Obter dados de Produção por Ano',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'ano',
@@ -17,6 +18,13 @@ producao_bp = Blueprint('producao', __name__)
             'type': 'integer',
             'required': False,
             'description': 'O ano para filtrar os dados de produção'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {

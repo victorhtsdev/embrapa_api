@@ -10,6 +10,7 @@ comercio_bp = Blueprint('comercio', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Obter dados de comércio por ano',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'ano',
@@ -17,6 +18,13 @@ comercio_bp = Blueprint('comercio', __name__)
             'type': 'integer',
             'required': False,
             'description': 'O ano para filtrar os dados de comércio'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {

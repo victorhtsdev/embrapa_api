@@ -8,21 +8,19 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
 @swag_from({
-    'summary': 'Chamada para Login',
+    'summary': 'Login, gerar Bearer Token',
     'parameters': [
         {
-            'name': 'username',
+            'name': 'body',
             'in': 'body',
-            'type': 'string',
             'required': True,
-            'description': 'O Username do Usuário'
-        },
-        {
-            'name': 'password',
-            'in': 'body',
-            'type': 'string',
-            'required': True,
-            'description': 'A senha do Usuário'
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'username': {'type': 'string', 'description': 'O Username do Usuário'},
+                    'password': {'type': 'string', 'description': 'A Senha do Usuário'}
+                }
+            },
         }
     ],
     'responses': {
@@ -58,21 +56,19 @@ def login():
 
 @auth_bp.route('/register', methods=['POST'])
 @swag_from({
-    'summary': 'Chamada para Registro de Usuários',
-        'parameters': [
+    'summary': 'Registro de Usuários',
+    'parameters': [
         {
-            'name': 'username',
+            'name': 'body',
             'in': 'body',
-            'type': 'string',
             'required': True,
-            'description': 'O Username do Usuário'
-        },
-        {
-            'name': 'password',
-            'in': 'body',
-            'type': 'string',
-            'required': True,
-            'description': 'A Senha do Usuário'
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'username': {'type': 'string', 'description': 'O Username do Usuário'},
+                    'password': {'type': 'string', 'description': 'A Senha do Usuário'}
+                }
+            },
         }
     ],
     'responses': {

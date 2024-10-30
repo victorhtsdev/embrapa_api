@@ -10,18 +10,25 @@ exportacao_bp = Blueprint('exportacao', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Obter dados de Exportação por Ano',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'objeto',
             'in': 'path',
             'type': 'string',
             'required': True,
+            'enum': [
+                'exportacaoVinhoMesa',
+                'exportacaoEspumantes',
+                'exportacaoUvasFrescas',
+                'exportacaoSuco'
+            ],
             'description': (
-                    'Opções da aba Exportação do site da Embrapa:<br>'
-                    '<b>exportacaoVinhoMesa</b> - Vinhos de Mesa<br>'
-                    '<b>exportacaoEspumantes</b> - Espumantes<br>'
-                    '<b>exportacaoUvasFrescas</b> - Uvas Frescas<br>'
-                    '<b>exportacaoSuco</b> - Suco de Uva<br><br>'
+                'Opções da aba Exportação do site da Embrapa:<br>'
+                '<b>exportacaoVinhoMesa</b> - Vinhos de Mesa<br>'
+                '<b>exportacaoEspumantes</b> - Espumantes<br>'
+                '<b>exportacaoUvasFrescas</b> - Uvas Frescas<br>'
+                '<b>exportacaoSuco</b> - Suco de Uva<br><br>'
             )
         },
         {
@@ -30,6 +37,13 @@ exportacao_bp = Blueprint('exportacao', __name__)
             'type': 'integer',
             'required': False,
             'description': 'Ano da exportação'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {

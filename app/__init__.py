@@ -11,6 +11,7 @@ from app.routes.data_log_routes import data_log_bp
 from app.management.scheduled_tasks import start_scheduler, run_embrapa_task
 from dotenv import load_dotenv
 import os
+from flasgger import Swagger
 
 def create_app():
     app = Flask(__name__)
@@ -18,7 +19,30 @@ def create_app():
     app.config.from_object('app.config.Config')
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
     db.init_app(app)
-    jwt = JWTManager(app)
+    JWTManager(app)
+
+    swagger_config = {
+        "title": "Embrapa API - POS TECH FIAP",
+        "description": "API para retornar os dados de Produção, Processamento, Comercialização, Importação e Exportação da Embrapa.",
+        "version": "1.0.0",
+        "termsOfService": "/terms",
+        "specs": [
+            {
+                "endpoint": "apispec_1",
+                "route": "/apispec_1.json",
+                "rule_filter": lambda rule: True,  # Incluir todos os endpoints
+                "model_filter": lambda tag: True,  # Incluir todos os modelos
+            }
+        ],
+        "static_url_path": "/flasgger_static",
+        "swagger_ui": True,
+        "specs_route": "/apidocs/",
+        "headers": []  # Define headers como uma lista vazia
+    }
+
+
+    Swagger(app, config=swagger_config)
+
 
     app.register_blueprint(producao_bp, url_prefix='/api')
     app.register_blueprint(data_log_bp, url_prefix='/api')

@@ -10,18 +10,25 @@ processamento_bp = Blueprint('processamento', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Obter dados de Processamento por Ano',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'objeto',
             'in': 'path',
             'type': 'string',
             'required': True,
+            'enum': [
+                'processamentoViniferas',
+                'processamentoAmericanas',
+                'processamentoUvaMesa',
+                'processamentoSemClass'
+            ],
             'description': (
-                    'Opções da aba Processamento do site da Embrapa.<br>'
-                    '<b>processamentoViniferas</b> - Viníferas<br>'
-                    '<b>processamentoAmericanas</b> - Americanas e Híbridas<br>'
-                    '<b>processamentoUvaMesa</b> - Uvas de Mesa<br>'
-                    '<b>processamentoSemClass</b> - Sem Classificação<br><br>'
+                'Opções da aba Processamento do site da Embrapa.<br>'
+                '<b>processamentoViniferas</b> - Viníferas<br>'
+                '<b>processamentoAmericanas</b> - Americanas e Híbridas<br>'
+                '<b>processamentoUvaMesa</b> - Uvas de Mesa<br>'
+                '<b>processamentoSemClass</b> - Sem Classificação<br><br>'
             )
         },
         {
@@ -30,6 +37,13 @@ processamento_bp = Blueprint('processamento', __name__)
             'type': 'integer',
             'required': False,
             'description': 'O ano para filtrar os dados de processamento'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {

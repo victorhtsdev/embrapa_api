@@ -10,12 +10,20 @@ importacao_bp = Blueprint('importacao', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Obter dados de Importação por Ano',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'objeto',
             'in': 'path',
             'type': 'string',
             'required': True,
+            'enum': [
+                'importacaoVinhoMesa',
+                'importacaoEspumantes',
+                'importacaoUvasFrescas',
+                'importacaoUvasPassas',
+                'importacaoSuco'
+            ],
             'description': (
                     'Opções da aba Importação do site da Embrapa:<br>'
                     '<b>importacaoVinhoMesa</b> - Vinhos de Mesa<br>'
@@ -31,6 +39,13 @@ importacao_bp = Blueprint('importacao', __name__)
             'type': 'integer',
             'required': False,
             'description': 'Ano da importação'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {

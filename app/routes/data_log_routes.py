@@ -10,6 +10,7 @@ data_log_bp = Blueprint('data_info', __name__)
 @jwt_required()
 @swag_from({
     'summary': 'Chamada para Data_log, Para teste de DEVs (Versionamento do CSV de Download)',
+    'security': [{"BearerAuth": []}],
     'parameters': [
         {
             'name': 'uuid',
@@ -17,6 +18,13 @@ data_log_bp = Blueprint('data_info', __name__)
             'type': 'string',
             'required': True,
             'description': 'O UUID do log de dados'
+        },
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer {token}'
         }
     ],
     'responses': {
