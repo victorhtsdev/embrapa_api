@@ -9,7 +9,7 @@ comercio_bp = Blueprint('comercio', __name__)
 @comercio_bp.route('/comercio', methods=['GET'])
 @jwt_required()
 @swag_from({
-    'tags': ['Dados Embrapa'],
+    'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Comercialização por ano',
     'security': [{"BearerAuth": []}],
     'parameters': [

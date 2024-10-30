@@ -9,7 +9,7 @@ exportacao_bp = Blueprint('exportacao', __name__)
 @exportacao_bp.route('/exportacao/<objeto>', methods=['GET'])
 @jwt_required()
 @swag_from({
-    'tags': ['Dados Embrapa'],
+    'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Exportação por Ano',
     'security': [{"BearerAuth": []}],
     'parameters': [

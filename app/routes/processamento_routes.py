@@ -9,7 +9,7 @@ processamento_bp = Blueprint('processamento', __name__)
 @processamento_bp.route('/processamento/<objeto>', methods=['GET'])
 @jwt_required()
 @swag_from({
-    'tags': ['Dados Embrapa'],
+    'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Processamento por Ano',
     'security': [{"BearerAuth": []}],
     'parameters': [

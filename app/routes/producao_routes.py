@@ -9,7 +9,7 @@ producao_bp = Blueprint('producao', __name__)
 @producao_bp.route('/producao', methods=['GET'])
 @jwt_required()
 @swag_from({
-    'tags': ['Dados Embrapa'],
+    'tags': ['Dados Vinicultura Embrapa'],
     'summary': 'Obter dados de Produção por Ano',
     'security': [{"BearerAuth": []}],
     'parameters': [
