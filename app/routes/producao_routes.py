@@ -31,18 +31,42 @@ producao_bp = Blueprint('producao', __name__)
         200: {
             'description': 'Dados de produção recuperados com sucesso',
             'schema': {
-                'type': 'array',
-                'items': {
-                    'type': 'object',
-                    'properties': {
-                        'uuid': {'type': 'string', 'description': 'O UUID do registro'},
-                        'id': {'type': 'integer', 'description': 'O ID do registro'},
-                        'control': {'type': 'string', 'description': 'Controle do registro'},
-                        'produto': {'type': 'string', 'description': 'O produto'},
-                        'ano': {'type': 'integer', 'description': 'O ano do registro'},
-                        'quantidade': {'type': 'number', 'description': 'A quantidade produzida'},
-                        'tipo': {'type': 'string', 'description': 'O tipo de produção'},
-                        'totalizador': {'type': 'string', 'description': 'Totalizador do registro'}
+                'type': 'object',
+                'properties': {
+                    'last_uuid': {'type': 'string', 'description': 'O último UUID processado'},
+                    'object_modified_data': {'type': 'string', 'description': 'Data de modificação do objeto'},
+                    'record_date': {'type': 'string', 'description': 'Data do registro'},
+                    'producao': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'ano': {'type': 'string', 'description': 'Ano do processamento'},
+                                'quantidade_total_kg': {'type': 'string', 'description': 'Quantidade total em kg'},
+                                'tipos': {
+                                    'type': 'array',
+                                    'items': {
+                                        'type': 'object',
+                                        'properties': {
+                                            'tipo_produto': {'type': 'string', 'description': 'Tipo de produto'},
+                                            'quantidade_tipo_kg': {'type': 'string',
+                                                                   'description': 'Quantidade total do tipo em kg'},
+                                            'itens': {
+                                                'type': 'array',
+                                                'items': {
+                                                    'type': 'object',
+                                                    'properties': {
+                                                        'produto': {'type': 'string', 'description': 'Nome do produto'},
+                                                        'quantidade_produto_kg': {'type': 'string',
+                                                                                  'description': 'Quantidade do produto em kg'}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
