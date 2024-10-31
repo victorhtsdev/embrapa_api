@@ -3,6 +3,7 @@ from flask_jwt_extended import JWTManager
 from app.extensions import db
 from app.routes.auth_routes import auth_bp
 from app.routes.comercio_routes import comercio_bp
+from app.routes.doc_route import diagrama_bp
 from app.routes.exportacao_routes import exportacao_bp
 from app.routes.importacao_routes import importacao_bp
 from app.routes.processamento_routes import processamento_bp
@@ -23,7 +24,10 @@ def create_app():
 
     swagger_config = {
         "title": "Embrapa API - POS TECH FIAP",
-        "description": "API para disponibilizar dados de Produção, Processamento, Comercialização, Importação e Exportação capturados da Embrapa.",
+        "description": (
+            "API para disponibilizar dados de Produção, Processamento, Comercialização, Importação e Exportação capturados da Embrapa.<br><br>"
+            "<a href='/diagrama' target='_blank'>Diagrama da aplicação</a>."
+        ),
         "version": "1.0.0",
         "specs": [
             {
@@ -42,7 +46,7 @@ def create_app():
 
     Swagger(app, config=swagger_config)
 
-
+    app.register_blueprint(diagrama_bp, url_prefix='')
     app.register_blueprint(producao_bp, url_prefix='/api')
     app.register_blueprint(data_log_bp, url_prefix='/api')
     app.register_blueprint(exportacao_bp, url_prefix='/api')
