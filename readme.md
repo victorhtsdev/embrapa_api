@@ -151,21 +151,21 @@ Atividade feita como parte da avaliação do Curso de Pós Graduação em Mechin
 ## Exemplo de Uso - Flasgger
 
 ### Criação de Usuário e Senha
- ![Criação de Usário e Senha](documents\images\criar_user.png)
+ ![Criação de Usário e Senha](\documents\images\criar_user.png)
 
 ### Fazendo Login na API
-![Fazendo Login na API](documents\images\autenticação.png)
+![Fazendo Login na API](\documents\images\autenticação.png)
 
 ### Encontrando o Token de Acesso para Requisição 
 Faça a Cópia do Seu Token
-![Encontrando o Toke de Acesso](documents\images\token_acesso.png)
+![Encontrando o Toke de Acesso](\documents\images\token_acesso.png)
 
 ### Realizando Requisição GET pela API usando o Token
 No campo Authorization escreva "Bearer + Token"
-![Realizando Requisição Get](documents\images\gets.png)
+![Realizando Requisição Get](\documents\images\gets.png)
 
 ### Resultado - Retorno da API
-![Resultado - Retorno da API](documents\images\resultado.png)
+![Resultado - Retorno da API](\documents\images\resultado.png)
 
 ## Requisitos
 
