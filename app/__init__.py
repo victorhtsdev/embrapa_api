@@ -26,7 +26,7 @@ def create_app():
         "title": "Embrapa API - POS TECH FIAP",
         "description": (
             "API para disponibilizar dados de Produção, Processamento, Comercialização, Importação e Exportação capturados da Embrapa.<br><br>"
-            "<a href='/diagrama' target='_blank'>Diagrama da aplicação</a>."
+            "<a href='/diagrama' target='_blank'>Diagrama da aplicação</a>"
         ),
         "version": "1.0.0",
         "specs": [
