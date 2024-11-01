@@ -18,7 +18,7 @@ def run_embrapa_task(app):
 def start_scheduler(app):
     scheduler = BackgroundScheduler()
 
-    scheduler.add_job(func=lambda: run_embrapa_task(app), trigger="interval", hours=2)
+    scheduler.add_job(func=lambda: run_embrapa_task(app), trigger="interval", hours=12)
 
     run_embrapa_task(app)
 
