@@ -54,26 +54,58 @@ exportacao_bp = Blueprint('exportacao', __name__)
             'schema': {
                 'type': 'object',
                 'properties': {
-                    'last_uuid': {'type': 'string'},
-                    'record_date': {'type': 'string'},
-                    'object_modified_data': {'type': 'string'},
+                    'last_uuid': {
+                        'type': 'string',
+                        'description': 'O UUID do último registro'
+                    },
+                    'record_date': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data e hora do registro'
+                    },
+                    'object_modified_data': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data e hora da última modificação do objeto'
+                    },
                     'exportacao': {
                         'type': 'array',
                         'items': {
                             'type': 'object',
                             'properties': {
-                                'ano': {'type': 'string'},
-                                'objeto': {'type': 'string'},
-                                'quantidade_total': {'type': 'number'},
-                                'valor_total': {'type': 'number'},
+                                'ano': {
+                                    'type': 'string',
+                                    'description': 'Ano da exportação'
+                                },
+                                'objeto': {
+                                    'type': 'string',
+                                    'description': 'Objeto de exportação'
+                                },
+                                'quantidade_total': {
+                                    'type': 'number',
+                                    'description': 'Quantidade total exportada'
+                                },
+                                'valor_total': {
+                                    'type': 'number',
+                                    'description': 'Valor total exportado'
+                                },
                                 'paises': {
                                     'type': 'array',
                                     'items': {
                                         'type': 'object',
                                         'properties': {
-                                            'pais': {'type': 'string'},
-                                            'quantidade_pais': {'type': 'number'},
-                                            'valor_pais': {'type': 'number'}
+                                            'pais': {
+                                                'type': 'string',
+                                                'description': 'Nome do país'
+                                            },
+                                            'quantidade_pais': {
+                                                'type': 'number',
+                                                'description': 'Quantidade exportada para o país'
+                                            },
+                                            'valor_pais': {
+                                                'type': 'number',
+                                                'description': 'Valor exportado para o país'
+                                            }
                                         }
                                     }
                                 }

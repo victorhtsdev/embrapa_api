@@ -33,42 +33,69 @@ comercio_bp = Blueprint('comercio', __name__)
         200: {
             'description': 'Dados de comércio recuperados com sucesso',
             'schema': {
-                'type': 'array',
-                'items': {
-                    'type': 'object',
-                    'properties': {
-                        'uuid': {
-                            'type': 'string',
-                            'description': 'O UUID do registro'
-                        },
-                        'id': {
-                            'type': 'integer',
-                            'description': 'O ID do registro'
-                        },
-                        'control': {
-                            'type': 'string',
-                            'description': 'Controle do registro'
-                        },
-                        'produto': {
-                            'type': 'string',
-                            'description': 'O produto'
-                        },
-                        'ano': {
-                            'type': 'integer',
-                            'description': 'O ano do registro'
-                        },
-                        'quantidade': {
-                            'type': 'number',
-                            'description': 'A quantidade comercializada'
-                        },
-                        'tipo': {
-                            'type': 'string',
-                            'description': 'O tipo de comércio'
-                        },
-                        'totalizador': {
-                            'type': 'string',
-                            'description': 'Totalizador do registro'
+                'type': 'object',
+                'properties': {
+                    'comercio': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'ano': {
+                                    'type': 'string',
+                                    'description': 'Ano do registro de comércio'
+                                },
+                                'quantidade_litros_total': {
+                                    'type': 'string',
+                                    'description': 'Quantidade total de litros comercializados'
+                                },
+                                'tipos': {
+                                    'type': 'array',
+                                    'items': {
+                                        'type': 'object',
+                                        'properties': {
+                                            'tipo_produto': {
+                                                'type': 'string',
+                                                'description': 'Tipo de produto comercializado'
+                                            },
+                                            'quantidade_litros_tipo': {
+                                                'type': 'string',
+                                                'description': 'Quantidade de litros para o tipo de produto'
+                                            },
+                                            'itens': {
+                                                'type': 'array',
+                                                'items': {
+                                                    'type': 'object',
+                                                    'properties': {
+                                                        'produto': {
+                                                            'type': 'string',
+                                                            'description': 'Nome do produto'
+                                                        },
+                                                        'quantidade_litros_produto': {
+                                                            'type': 'string',
+                                                            'description': 'Quantidade de litros do produto'
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
+                    },
+                    'last_uuid': {
+                        'type': 'string',
+                        'description': 'O UUID do último registro'
+                    },
+                    'object_modified_data': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data e hora da última modificação do objeto'
+                    },
+                    'record_date': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data e hora do registro'
                     }
                 }
             }

@@ -54,29 +54,59 @@ processamento_bp = Blueprint('processamento', __name__)
             'schema': {
                 'type': 'object',
                 'properties': {
-                    'last_uuid': {'type': 'string', 'description': 'O último UUID processado'},
-                    'record_date': {'type': 'string', 'description': 'Data do registro'},
-                    'object_modified_data': {'type': 'string', 'description': 'Data de modificação do objeto'},
+                    'last_uuid': {
+                        'type': 'string',
+                        'description': 'O último UUID processado'
+                    },
+                    'record_date': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data do registro'
+                    },
+                    'object_modified_data': {
+                        'type': 'string',
+                        'format': 'date-time',
+                        'description': 'Data de modificação do objeto'
+                    },
                     'processamento': {
                         'type': 'array',
                         'items': {
                             'type': 'object',
                             'properties': {
-                                'ano': {'type': 'string', 'description': 'Ano do processamento'},
-                                'quantidade_total_kg': {'type': 'number', 'description': 'Quantidade total em kg'},
+                                'ano': {
+                                    'type': 'string',
+                                    'description': 'Ano do processamento'
+                                },
+                                'quantidade_total_kg': {
+                                    'type': 'number',
+                                    'description': 'Quantidade total em kg'
+                                },
                                 'tipos': {
                                     'type': 'array',
                                     'items': {
                                         'type': 'object',
                                         'properties': {
-                                            'tipo_cultivar': {'type': 'string', 'description': 'Tipo de cultivar'},
+                                            'tipo_cultivar': {
+                                                'type': 'string',
+                                                'description': 'Tipo de cultivo'
+                                            },
+                                            'quantidade_tipo_kg': {
+                                                'type': 'number',
+                                                'description': 'Quantidade total do tipo em kg'
+                                            },
                                             'itens': {
                                                 'type': 'array',
                                                 'items': {
                                                     'type': 'object',
                                                     'properties': {
-                                                        'cultivar': {'type': 'string', 'description': 'Cultivar'},
-                                                        'quantidade_cultivar_kg': {'type': 'number', 'description': 'Quantidade do cultivar em kg'}
+                                                        'cultivar': {
+                                                            'type': 'string',
+                                                            'description': 'Cultivar'
+                                                        },
+                                                        'quantidade_cultivar_kg': {
+                                                            'type': 'number',
+                                                            'description': 'Quantidade do cultivo em kg'
+                                                        }
                                                     }
                                                 }
                                             }
