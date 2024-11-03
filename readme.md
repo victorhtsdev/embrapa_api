@@ -273,7 +273,7 @@ Armazena informações dos usuários do sistema.
 - **Wpp:** +55 11 98560-3464
 
 ### Victor H.
-- **Wpp:** +55 11 97322-4256
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/victor-hugo-teles-de-santana-359ba260/)
 
 ### Nathan Lobato
 - **Wpp:** +55 42 99824-7049
