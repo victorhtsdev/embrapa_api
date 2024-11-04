@@ -85,17 +85,17 @@ def get_producao(ano=None):
             if not ano_json:
                 ano_json = {
                     'ano': ano_key,
-                    'quantidade_total_kg': 0,
+                    'quantidade_total_litros': 0,
                     'tipos': []
                 }
                 result['producao'].append(ano_json)
 
-            ano_json['quantidade_total_kg'] += tipo_produto.quantidade
+            ano_json['quantidade_total_litros'] += tipo_produto.quantidade
 
             tipo_produto_json = {
                 'tipo_produto': tipo_produto.produto,
                 'itens': [],
-                'quantidade_tipo_kg': tipo_produto.quantidade
+                'quantidade_tipo_litros': tipo_produto.quantidade
             }
 
             item_query = db.session.query(Producao).filter(
@@ -108,7 +108,7 @@ def get_producao(ano=None):
             for item in item_query:
                 item_data = {
                     'produto': item.produto,
-                    'quantidade_produto_kg': item.quantidade
+                    'quantidade_produto_litros': item.quantidade
                 }
                 tipo_produto_json['itens'].append(item_data)
 

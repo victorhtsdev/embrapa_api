@@ -44,23 +44,23 @@ producao_bp = Blueprint('producao', __name__)
                             'type': 'object',
                             'properties': {
                                 'ano': {'type': 'string', 'description': 'Ano do processamento'},
-                                'quantidade_total_kg': {'type': 'string', 'description': 'Quantidade total em kg'},
+                                'quantidade_total_litros': {'type': 'string', 'description': 'Quantidade total em litros'},
                                 'tipos': {
                                     'type': 'array',
                                     'items': {
                                         'type': 'object',
                                         'properties': {
                                             'tipo_produto': {'type': 'string', 'description': 'Tipo de produto'},
-                                            'quantidade_tipo_kg': {'type': 'string',
-                                                                   'description': 'Quantidade total do tipo em kg'},
+                                            'quantidade_tipo_litros': {'type': 'string',
+                                                                   'description': 'Quantidade total do tipo em litros'},
                                             'itens': {
                                                 'type': 'array',
                                                 'items': {
                                                     'type': 'object',
                                                     'properties': {
                                                         'produto': {'type': 'string', 'description': 'Nome do produto'},
-                                                        'quantidade_produto_kg': {'type': 'string',
-                                                                                  'description': 'Quantidade do produto em kg'}
+                                                        'quantidade_produto_litros': {'type': 'string',
+                                                                                  'description': 'Quantidade do produto em litros'}
                                                     }
                                                 }
                                             }
