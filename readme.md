@@ -270,12 +270,12 @@ Armazena informações dos usuários do sistema.
 ## Contato
 
 ### André Torres
-- **Wpp:** +55 11 98560-3464
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/andr%C3%A9-torres/)
 
 ### Victor H.
-- **Wpp:** +55 11 97322-4256
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/victor-hugo-teles-de-santana-359ba260/)
 
 ### Nathan Lobato
-- **Wpp:** +55 42 99824-7049
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/nathan-rafael-pedroso-lobato-144541114/)
 
 ---
