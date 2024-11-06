@@ -181,6 +181,15 @@ No campo Authorization escreva "Bearer + Token"
 - Flask-JWT-Extended==4.6.0
 - psycopg2-binary==2.9.10
 - flasgger==0.9.7.1
+  
+  ## Variáveis de Ambiente
+
+- **DATABASE_URL**: URL de conexão com o banco de dados. Exemplo para MySQL: `mysql+pymysql://root:testeteste@127.0.0.1:3306/embrapa` ou para PostgreSQL: `postgresql://postgres:super#@localhost:5432/embrapa_db`
+- **EMBRAPA_URL**: URL para download dos dados da Embrapa. Exemplo: `http://vitibrasil.cnpuv.embrapa.br/download/`
+- **JWT_SECRET_KEY**: Chave secreta para geração de tokens JWT. Exemplo: `8f9e2b7e1f72b7e9892d8937bb9c2c5ba3a9e3467f820cde27b1578912345678`
+- **<objeto>_FILE**: Nome do arquivo CSV que vamos buscar no site. Exemplos incluem `Producao.csv`, `ExpUva.csv`, `ImpVinhos.csv`, etc.
+- **<objeto>_LOG**: Permite ligar o log somente para o objeto especificado, caso `ALL_LOG` esteja desligado. O log é gravado na pasta `pasta_do_projeto/log/<objeto>`. Use `Y` para ativar.
+- **ALL_LOG**: Ativar ou desativar o registro de todos os logs. Use `Y` para ativar. Exemplo: `Y`
 
 ## Estrutura do Banco de Dados
 
